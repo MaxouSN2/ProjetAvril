@@ -1,0 +1,131 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cours PHP{% endblock %}
+
+{% block body %}
+    <div class="container text-center mt-5">
+        <!-- Section "Cours PHP" -->
+        <h2>Cours PHP</h2>
+    </div>
+
+    <!-- Introduction à PHP -->
+    <h3>Introduction à PHP</h3>
+    <p>
+        PHP (Hypertext Preprocessor) est un langage de programmation principalement utilisé pour créer des sites web dynamiques. Contrairement aux pages HTML statiques, PHP permet d'interagir avec les utilisateurs et de modifier le contenu d'une page en fonction des actions de l'utilisateur. 
+    </p>
+    <p>
+        Le code PHP est exécuté côté serveur, ce qui signifie que le serveur traite le code PHP et renvoie le résultat sous forme de HTML au navigateur de l'utilisateur. Cela permet de créer des pages web qui ne sont pas seulement statiques, mais aussi interactives et personnalisées en fonction des besoins des utilisateurs.
+    </p>
+    
+    <h3>Comment fonctionne PHP ?</h3>
+    <p>
+        Lorsqu'un utilisateur visite une page PHP, le serveur exécute le script PHP et génère du HTML ou du contenu dynamique. Ce processus est invisible pour l'utilisateur, car il ne voit que la version finale de la page générée. Le PHP peut interagir avec des bases de données, traiter des formulaires, gérer des sessions utilisateur, etc.
+    </p>
+    <p>
+        Par exemple, si vous avez un formulaire de contact sur un site, PHP peut traiter les informations envoyées par l'utilisateur et les stocker dans une base de données, ou encore envoyer un e-mail pour notifier quelqu'un de la soumission du formulaire.
+    </p>
+
+    <h3>Pourquoi utiliser PHP ?</h3>
+    <p>
+        PHP est populaire car il est facile à apprendre, puissant et bien adapté à la création de sites web dynamiques. Il est également largement utilisé avec des bases de données MySQL ou PostgreSQL, ce qui permet de créer des applications web interactives.
+    </p>
+    <p>
+        De plus, PHP est un langage open-source, ce qui signifie qu'il est gratuit à utiliser et qu'il bénéficie d'une large communauté de développeurs. Vous trouverez facilement des ressources, des bibliothèques, et des frameworks pour accélérer le développement d'applications web.
+    </p>
+
+    <h3>Les bases de PHP</h3>
+    <p>
+        Avant de commencer à coder, il est essentiel de comprendre les éléments de base du langage PHP. Cela inclut la déclaration de variables, les structures de contrôle (comme les conditions et les boucles), ainsi que l'utilisation des fonctions.
+    </p>
+
+    <h4>Déclaration de variables</h4>
+    <p>
+        En PHP, une variable est un conteneur qui peut contenir différentes sortes de données. Chaque variable commence par le symbole <code>$</code> suivi d'un nom. Par exemple, pour déclarer une variable contenant un texte, on peut écrire :
+    </p>
+    <pre><code>
+&lt;?php
+$nom = "Pierre";
+$age = 25;
+?&gt;
+    </code></pre>
+    <p>
+        Ici, <code>$nom</code> est une variable qui contient la chaîne de caractères "Pierre", et <code>$age</code> contient le nombre 25. Le PHP est un langage faiblement typé, ce qui signifie que vous n'avez pas besoin de spécifier le type de la donnée que vous assignez à une variable.
+    </p>
+
+    <h4>Les structures conditionnelles</h4>
+    <p>
+        Les structures conditionnelles permettent d'exécuter du code seulement si certaines conditions sont remplies. Par exemple, voici un code PHP qui vérifie si une personne est majeure :
+    </p>
+    <pre><code>
+&lt;?php
+$age = 20;
+
+if ($age >= 18) {
+    echo "Vous êtes majeur.";
+} else {
+    echo "Vous êtes mineur.";
+}
+?&gt;
+    </code></pre>
+    <p>
+        Dans cet exemple, PHP vérifie si la variable <code>$age</code> est supérieure ou égale à 18. Si c'est le cas, le message "Vous êtes majeur." est affiché. Sinon, le message "Vous êtes mineur." s'affiche.
+    </p>
+
+    <h4>Les boucles</h4>
+    <p>
+        Les boucles permettent de répéter un bloc de code plusieurs fois. Par exemple, si vous voulez afficher les nombres de 1 à 5, vous pouvez utiliser une boucle <code>for</code> :
+    </p>
+    <pre><code>
+&lt;?php
+for ($i = 1; $i <= 5; $i++) {
+    echo "Le nombre est : " . $i . "&lt;br&gt;";
+}
+?&gt;
+    </code></pre>
+    <p>
+        Ce code va afficher les nombres de 1 à 5. La boucle <code>for</code> fonctionne en initialisant la variable <code>$i</code> à 1, puis en l'incrémentant à chaque itération, jusqu'à ce qu'elle atteigne 5.
+    </p>
+
+    <h4>Les fonctions</h4>
+    <p>
+        Les fonctions permettent de regrouper des blocs de code que vous pouvez réutiliser plusieurs fois. Par exemple, voici une fonction simple qui affiche un message de bienvenue :
+    </p>
+    <pre><code>
+&lt;?php
+function saluer($prenom) {
+    return "Bonjour, " . $prenom . " !";
+}
+
+echo saluer("Pierre");
+?&gt;
+    </code></pre>
+    <p>
+        Dans cet exemple, la fonction <code>saluer</code> prend un argument <code>$prenom</code> et renvoie une chaîne de caractères personnalisée. Lorsqu'on appelle la fonction avec l'argument "Pierre", elle affiche "Bonjour, Pierre !".
+    </p>
+
+    <h3>Conclusion</h3>
+    <p>
+        PHP est un langage de programmation extrêmement puissant et flexible pour créer des sites web dynamiques et interactifs. Nous avons exploré les bases du langage, comme les variables, les structures conditionnelles, les boucles, et les fonctions, qui sont des concepts fondamentaux à maîtriser pour devenir un développeur PHP efficace.
+    </p>
+    <p>
+        Si vous êtes débutant, il est essentiel de pratiquer régulièrement en réalisant des projets simples et en expérimentant avec des exemples de code. Une fois que vous maîtriserez ces concepts de base, vous pourrez aller plus loin en découvrant des outils plus avancés, comme les bases de données avec PHP et les frameworks PHP populaires tels que Laravel ou Symfony.
+    </p>
+    <p>
+        N'oubliez pas que la communauté PHP est très active, et vous trouverez une multitude de ressources, de tutoriels et de forums pour vous aider dans votre apprentissage. Bon code et à bientôt !
+    </p>
+
+    <!-- Vidéo YouTube -->
+    <div class="container text-center mt-5">
+        <h4 class="mt-5 mb-4">Pour en apprendre davantage en PHP, vous trouverez ci-dessous une vidéo explicative qui concerne l'intégralité de PHP</h4>
+        <div class="video-container mb-5">
+            <iframe 
+                src="https://www.youtube.com/embed/fcZ9hL9xl6o" 
+                title="Cours complet PHP" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowfullscreen>
+            </iframe>
+        </div>
+    </div>
+
+{% endblock %}

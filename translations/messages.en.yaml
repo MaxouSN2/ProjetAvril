@@ -1,0 +1,3 @@
+password_requirements: "The password must contain at least one uppercase letter, one lowercase letter, a digit, and a special character."
+email_invalid: "The email is not valid."
+password_mismatch: "The passwords do not match."

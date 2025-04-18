@@ -1,0 +1,168 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cours Symfony{% endblock %}
+
+{% block body %}
+    <div class="container text-center mt-5">
+        <!-- Section "Cours Symfony" -->
+        <h2>Cours Symfony</h2>
+    </div>
+
+    <!-- Introduction à Symfony -->
+    <h3>Introduction à Symfony</h3>
+    <p>
+        Symfony est un framework PHP open-source destiné à faciliter le développement d'applications web. Il repose sur l'architecture MVC (Modèle-Vue-Contrôleur), ce qui permet de séparer la logique de l'application, l'affichage et la gestion des requêtes.
+    </p>
+    <p>
+        Ce framework est utilisé par de nombreux projets professionnels grâce à sa modularité, sa flexibilité et sa communauté active. Il permet de créer des applications web performantes, évolutives et maintenables.
+    </p>
+
+    <h3>Pourquoi utiliser Symfony ?</h3>
+    <p>
+        Symfony présente plusieurs avantages qui le rendent populaire auprès des développeurs. Voici les principaux :
+    </p>
+    <ul>
+        <li><strong>Modularité</strong> : Symfony est constitué de nombreux composants réutilisables, permettant de n'utiliser que ce dont vous avez besoin.</li>
+        <li><strong>Flexibilité</strong> : Il peut être utilisé pour des applications petites comme pour des applications d'entreprise complexes.</li>
+        <li><strong>Communauté</strong> : Une large communauté active, avec une documentation exhaustive et de nombreux bundles prêts à l'emploi.</li>
+        <li><strong>Tests</strong> : Symfony offre un excellent support pour les tests unitaires et fonctionnels, ce qui facilite le développement d'applications robustes.</li>
+    </ul>
+
+    <h3>Installation de Symfony</h3>
+    <p>
+        Pour démarrer avec Symfony, voici les étapes pour installer le framework sur votre machine :
+    </p>
+    
+    <h4>1. Prérequis</h4>
+    <p>
+        Avant d'installer Symfony, vous devez disposer de PHP (version 7.2.5 ou supérieure), Composer (le gestionnaire de dépendances PHP) et un serveur web comme Apache ou Nginx.
+    </p>
+
+    <h4>2. Installer Symfony avec Composer</h4>
+    <p>
+        La méthode la plus simple d'installation est d'utiliser Composer, un gestionnaire de dépendances pour PHP. Voici la commande à exécuter :
+    </p>
+    <pre><code>
+composer create-project symfony/skeleton mon_projet
+    </code></pre>
+    <p>
+        Cette commande crée un nouveau projet Symfony avec une configuration de base dans un dossier nommé <code>mon_projet</code>.
+    </p>
+
+    <h4>3. Démarrer le serveur Symfony</h4>
+    <p>
+        Une fois l'installation terminée, vous pouvez lancer un serveur de développement intégré en exécutant cette commande :
+    </p>
+    <pre><code>
+cd mon_projet
+symfony serve
+    </code></pre>
+    <p>
+        Le serveur sera accessible à l'adresse <code>http://localhost:8000</code>, où vous pourrez voir votre application Symfony en fonctionnement.
+    </p>
+
+    <h3>Les concepts de base de Symfony</h3>
+    <p>
+        Symfony repose sur des concepts clés que chaque développeur doit comprendre pour l'utiliser efficacement. Voici les plus importants :
+    </p>
+
+    <h4>1. Le Routage et les Contrôleurs</h4>
+    <p>
+        Symfony utilise un système de routage pour lier les URL à des méthodes de contrôleurs. Un contrôleur est une classe PHP qui gère la logique d'une action dans l'application.
+    </p>
+    <p>
+        Exemple de contrôleur qui renvoie une réponse simple à la racine du site :
+    </p>
+    <pre><code>
+namespace App\Controller;
+
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+
+class DefaultController
+{
+    /**
+     * @Route("/", name="home")
+     */
+    public function index()
+    {
+        return new Response('Bienvenue sur Symfony !');
+    }
+}
+    </code></pre>
+    <p>
+        Ici, l'annotation <code>@Route</code> lie la méthode <code>index()</code> à l'URL <code>/</code> du site. Lorsque l'utilisateur accède à cette URL, le message "Bienvenue sur Symfony !" est affiché.
+    </p>
+
+    <h4>2. Les Vues avec Twig</h4>
+    <p>
+        Symfony utilise le moteur de templates <strong>Twig</strong> pour générer des vues dynamiques. Twig permet de séparer la logique de l'affichage et de faciliter la maintenance du code HTML.
+    </p>
+    <p>
+        Exemple d'un template Twig qui affiche un message :
+    </p>
+    <p>
+        Dans le contrôleur, on passe cette variable à Twig comme ceci :
+    </p>
+    <pre><code>
+public function index(): Response
+{
+    return $this->render('index.html.twig', [
+        'message' => 'Bienvenue sur Symfony !',
+    ]);
+}
+    </code></pre>
+
+    <h4>3. Les Formulaires Symfony</h4>
+    <p>
+        Symfony dispose d'un composant Form pour générer et gérer facilement les formulaires. Ce composant vous permet de créer des formulaires avec des champs de saisie, des boutons, et de valider les données soumises.
+    </p>
+    <p>
+        Voici un exemple de formulaire pour ajouter un utilisateur :
+    </p>
+    <pre><code>
+namespace App\Form;
+
+use App\Entity\User;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\FormBuilderInterface;
+
+class UserType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder
+            ->add('name', TextType::class)
+            ->add('submit', SubmitType::class);
+    }
+}
+    </code></pre>
+    <p>
+        Une fois ce formulaire défini, vous pouvez l'afficher dans votre contrôleur et le rendre dans votre vue Twig.
+    </p>
+
+    <h3>Les Composants Symfony</h3>
+    <p>
+        Symfony est construit autour de nombreux composants réutilisables qui peuvent être utilisés indépendamment dans d'autres projets PHP. Voici quelques-uns des composants les plus utilisés :
+    </p>
+    <ul>
+        <li><strong>Doctrine ORM</strong> : Pour la gestion des bases de données et les opérations CRUD.</li>
+        <li><strong>Security</strong> : Pour gérer l'authentification et l'autorisation des utilisateurs.</li>
+        <li><strong>Mailer</strong> : Pour l'envoi d'e-mails.</li>
+        <li><strong>Validation</strong> : Pour valider les données soumises par l'utilisateur ou les objets.</li>
+    </ul>
+
+    <h3>Conclusion</h3>
+    <p>
+        Symfony est un framework très puissant et flexible qui permet de développer des applications web modernes et robustes. Nous avons couvert les concepts essentiels comme les contrôleurs, les vues, les formulaires et les composants.
+    </p>
+    <p>
+        Pour aller plus loin, vous pouvez consulter la documentation officielle de Symfony, qui regorge de ressources pour vous aider à créer des applications plus complexes et intégrer des fonctionnalités avancées.
+    </p>
+    <p>
+        Symfony dispose également de nombreux <a href="https://symfony.com/doc/current/bundles.html" target="_blank">bundles</a> qui permettent d'ajouter des fonctionnalités supplémentaires à votre projet.
+    </p>
+
+{% endblock %}

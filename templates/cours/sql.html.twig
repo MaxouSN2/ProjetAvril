@@ -1,0 +1,132 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cours SQL{% endblock %}
+
+{% block body %}
+    <div class="container text-center mt-5">
+        <!-- Section "Cours SQL" -->
+        <h2>Cours SQL</h2>
+    </div>
+
+    <!-- Introduction à SQL -->
+    <h3>Introduction à SQL</h3>
+    <p>
+        SQL (Structured Query Language) est un langage standardisé utilisé pour interagir avec des bases de données relationnelles. Il permet de créer, modifier, gérer et interroger des bases de données pour extraire ou manipuler des données.
+    </p>
+    <p>
+        SQL est utilisé par de nombreuses bases de données populaires telles que MySQL, PostgreSQL, Microsoft SQL Server, et SQLite. Grâce à SQL, les développeurs peuvent interroger des données, insérer de nouvelles informations, mettre à jour des enregistrements existants ou supprimer des données.
+    </p>
+
+    <h3>Comment fonctionne SQL ?</h3>
+    <p>
+        SQL fonctionne en envoyant des requêtes à une base de données. Une requête SQL est une instruction écrite en langage SQL qui indique à la base de données ce que vous voulez qu'elle fasse. Une base de données répond ensuite en exécutant l'opération demandée.
+    </p>
+    <p>
+        Par exemple, une requête SQL pourrait être utilisée pour récupérer tous les enregistrements d'une table, ajouter de nouvelles données, ou encore modifier des informations existantes. Ces opérations sont appelées <strong>CRUD</strong> (Create, Read, Update, Delete).
+    </p>
+
+    <h3>Les commandes de base en SQL</h3>
+    <p>
+        Il existe plusieurs types de commandes SQL, les plus courantes étant les suivantes :
+        <ul>
+            <li><strong>SELECT</strong> : pour lire ou récupérer des données.</li>
+            <li><strong>INSERT</strong> : pour ajouter de nouvelles données dans une table.</li>
+            <li><strong>UPDATE</strong> : pour modifier des données existantes.</li>
+            <li><strong>DELETE</strong> : pour supprimer des données.</li>
+        </ul>
+    </p>
+
+    <h4>1. Sélectionner des données avec <code>SELECT</code></h4>
+    <p>
+        La commande <code>SELECT</code> est utilisée pour interroger des données à partir d'une ou plusieurs tables. Par exemple, pour récupérer toutes les colonnes d'une table appelée <code>utilisateurs</code>, on utilise la commande suivante :
+    </p>
+    <pre><code>
+SELECT * FROM utilisateurs;
+    </code></pre>
+    <p>
+        Cette requête récupère toutes les colonnes (<code>*</code>) de tous les enregistrements de la table <code>utilisateurs</code>.
+    </p>
+
+    <h4>2. Filtrer les résultats avec <code>WHERE</code></h4>
+    <p>
+        Vous pouvez ajouter des conditions à votre requête pour filtrer les résultats avec la clause <code>WHERE</code>. Par exemple, si vous voulez récupérer tous les utilisateurs dont l'âge est supérieur à 30 ans, vous pouvez utiliser la requête suivante :
+    </p>
+    <pre><code>
+SELECT * FROM utilisateurs WHERE age > 30;
+    </code></pre>
+    <p>
+        Ici, nous sélectionnons tous les utilisateurs dont l'âge est supérieur à 30. Le mot-clé <code>WHERE</code> permet de spécifier les critères de sélection.
+    </p>
+
+    <h4>3. Trier les résultats avec <code>ORDER BY</code></h4>
+    <p>
+        Si vous souhaitez trier les résultats d'une requête, vous pouvez utiliser <code>ORDER BY</code>. Par exemple, pour trier les utilisateurs par âge de manière croissante, vous pouvez utiliser cette requête :
+    </p>
+    <pre><code>
+SELECT * FROM utilisateurs ORDER BY age ASC;
+    </code></pre>
+    <p>
+        La clause <code>ASC</code> indique un tri croissant. Si vous souhaitez un tri décroissant, utilisez <code>DESC</code> à la place de <code>ASC</code>.
+    </p>
+
+    <h4>4. Ajouter des données avec <code>INSERT INTO</code></h4>
+    <p>
+        La commande <code>INSERT INTO</code> permet d'ajouter de nouvelles données dans une table. Par exemple, pour ajouter un nouvel utilisateur dans la table <code>utilisateurs</code>, vous pouvez utiliser cette requête :
+    </p>
+    <pre><code>
+INSERT INTO utilisateurs (nom, age, email) 
+VALUES ('Pierre', 28, 'pierre@example.com');
+    </code></pre>
+    <p>
+        Cette requête ajoute un nouvel utilisateur avec les valeurs spécifiées pour <code>nom</code>, <code>age</code>, et <code>email</code>.
+    </p>
+
+    <h4>5. Modifier des données avec <code>UPDATE</code></h4>
+    <p>
+        La commande <code>UPDATE</code> est utilisée pour modifier des enregistrements existants. Par exemple, si vous souhaitez mettre à jour l'adresse e-mail d'un utilisateur dont l'identifiant est 1, vous pouvez utiliser la requête suivante :
+    </p>
+    <pre><code>
+UPDATE utilisateurs 
+SET email = 'nouveauemail@example.com' 
+WHERE id = 1;
+    </code></pre>
+    <p>
+        Cette requête met à jour l'email de l'utilisateur avec l'ID égal à 1.
+    </p>
+
+    <h4>6. Supprimer des données avec <code>DELETE</code></h4>
+    <p>
+        La commande <code>DELETE</code> permet de supprimer des enregistrements d'une table. Par exemple, pour supprimer un utilisateur dont l'identifiant est 1, vous pouvez utiliser cette requête :
+    </p>
+    <pre><code>
+DELETE FROM utilisateurs WHERE id = 1;
+    </code></pre>
+    <p>
+        Cette requête supprime l'utilisateur dont l'ID est égal à 1. Soyez prudent avec la commande <code>DELETE</code>, car elle supprime définitivement les données.
+    </p>
+
+    <h3>Les jointures SQL</h3>
+    <p>
+        Les jointures (ou <em>joins</em>) sont utilisées pour combiner des données provenant de plusieurs tables. Par exemple, si vous avez une table <code>utilisateurs</code> et une table <code>commandes</code>, vous pouvez utiliser une jointure pour afficher les informations de l'utilisateur avec ses commandes.
+    </p>
+    <p>
+        Voici un exemple de jointure entre deux tables, avec l'utilisation de <code>INNER JOIN</code> pour récupérer les utilisateurs et leurs commandes :
+    </p>
+    <pre><code>
+SELECT utilisateurs.nom, commandes.date 
+FROM utilisateurs
+INNER JOIN commandes ON utilisateurs.id = commandes.utilisateur_id;
+    </code></pre>
+    <p>
+        Cette requête récupère le nom de l'utilisateur et la date de ses commandes, en combinant les données des deux tables à l'aide de la condition spécifiée après <code>ON</code>.
+    </p>
+
+    <h3>Conclusion</h3>
+    <p>
+        SQL est un langage puissant et essentiel pour manipuler des bases de données relationnelles. En maîtrisant les commandes de base comme <code>SELECT</code>, <code>INSERT</code>, <code>UPDATE</code>, et <code>DELETE</code>, vous serez capable de gérer efficacement des bases de données et de récupérer des informations de manière structurée.
+    </p>
+    <p>
+        Avec l'utilisation des jointures et des agrégats, vous pourrez également effectuer des requêtes plus complexes pour répondre à des besoins spécifiques d'analyse de données.
+    </p>
+
+{% endblock %}

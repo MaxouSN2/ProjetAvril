@@ -3,3 +3,20 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+
+
+client_prenom:
+  path: /client/prenom/{prenom}
+  controller: App\Controller\ClientController::info
+  requirements:
+        prenom: '^[a-zA-Z]+(-[a-zA-Z]+)*$'
+
+
+route_accueil:
+  path: /accueil
+  controller: App\Controller\AccueilController::home
+
+route_home:
+  path: /
+  controller: App\Controller\DefaultController::redirectToAccueil
+
