@@ -1,0 +1,99 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recapitulatif{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1 class="mb-4">Recapitulatif</h1>
+    <p>Ce quiz est un recap de 21 questions sur l'ensemble des cours disponible.</p>
+    <p> Il y a 7 questions sur les thèmes suivants : PHP, SQL et Symfony </p>
+
+    {# Bloc Résultats et Correction #}
+    {% if showResults %}
+        <div class="alert alert-info">
+            <h4>Résultats :</h4>
+            <p>Bonnes réponses : {{ score.correct }}</p>
+            <p>Mauvaises réponses : {{ score.incorrect }}</p>
+            <p>Score : {{ score.correct }}/{{ score.total }}</p>
+        </div>
+
+        <div class="mt-4">
+            <h4>Correction :</h4>
+
+            {% for i, question in questions %}
+                {% set userAnswer = userAnswers[i]|default(null) %}
+                {% set isCorrect = userAnswer == question.answer %}
+                <div class="card my-3"
+                     style="background-color: {% if isCorrect %}lightgreen{% else %}lightcoral{% endif %}; color: #000;">
+                    <div class="card-body">
+                        <h5 class="card-title">Question {{ i + 1 }}</h5>
+                        <p class="card-text"><strong>{{ question.question }}</strong></p>
+
+                        <p>
+                            ✅ <strong>Bonne réponse :</strong> {{ question.options[question.answer] }}<br>
+                            📝 <strong>Votre réponse :</strong>
+                            {% if userAnswer is not null %}
+                                {{ question.options[userAnswer] }}
+                                {% if not isCorrect %} ❌ {% endif %}
+                            {% else %}
+                                <span>Aucune réponse</span>
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <a href="{{ path('quiz-recap', {'q': 0}) }}" class="btn btn-secondary mt-3">Recommencer</a>
+        <a href="{{ path('quiz_recap_export_csv') }}" class="btn btn-success mt-3">
+            📥 Exporter les résultats en CSV
+        </a>
+
+
+    {# Bloc Quiz Question par Question #}
+    {% else %}
+        {% set question = questions[0] %}
+
+        {# Barre de progression #}
+        {% set progress = ((currentQuestion + 1) / totalQuestions * 100)|round(0, 'floor') %}
+        {% set barColor = progress < 40 ? 'bg-danger' : (progress < 70 ? 'bg-warning' : 'bg-success') %}
+        <div class="progress mb-4" style="height: 25px;">
+            <div class="progress-bar {{ barColor }} progress-bar-striped progress-bar-animated"
+                 role="progressbar"
+                 style="width: {{ progress }}%; transition: width 0.5s ease-in-out;"
+                 aria-valuenow="{{ progress }}"
+                 aria-valuemin="0"
+                 aria-valuemax="100">
+                {{ progress }}%
+            </div>
+        </div>
+
+        <h4>Question {{ currentQuestion + 1 }} sur {{ totalQuestions }}</h4>
+        <p>{{ question.question }}</p>
+
+        <form method="post">
+            {% for optionIndex, option in question.options %}
+                <div class="form-check">
+                    <input class="form-check-input"
+                           type="radio"
+                           name="answer"
+                           value="{{ optionIndex }}"
+                           id="option{{ optionIndex }}"
+                           {% if userAnswers[currentQuestion]|default(null) == optionIndex %}checked{% endif %}>
+                    <label class="form-check-label" for="option{{ optionIndex }}">
+                        {{ option }}
+                    </label>
+                </div>
+            {% endfor %}
+
+            <button type="submit" class="btn btn-primary mt-3">
+                {% if currentQuestion + 1 == totalQuestions %}
+                    Voir les résultats
+                {% else %}
+                    Question suivante
+                {% endif %}
+            </button>
+        </form>
+    {% endif %}
+</div>
+{% endblock %}

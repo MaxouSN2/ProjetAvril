@@ -27,39 +27,36 @@
                         <a class="nav-link" href="/a-propos">À propos</a>
                     </li>
 
-                    <!-- Ajout de l'onglet "PHP" -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="/cours-php">Cours PHP</a>
+                        <!-- Menu déroulant Cours -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="coursDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Cours
+                            </a>
+                        <ul class="dropdown-menu" aria-labelledby="coursDropdown">
+                            <li><a class="dropdown-item" href="/cours-php">Cours PHP</a></li>
+                            <li><a class="dropdown-item" href="/cours-sql">Cours SQL</a></li>
+                            <li><a class="dropdown-item" href="/cours-symfony">Cours Symfony</a></li>
+                            
+                        </ul>
                     </li>
 
-                    <!-- Ajout de l'onglet "SQL" -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="/cours-sql">Cours SQL</a>
-                    </li>
-
-                     <!-- Ajout de l'onglet "Symfony" -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="/cours-symfony">Cours Symfony</a>
-                    </li>
-
-                    <!-- Ajout de l'onglet "Quiz PHP" -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="/quiz-php">Quiz PHP</a>
-                    </li>
-
-                     <!-- Ajout de l'onglet "Quiz SQL" -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="/quiz-sql">Quiz SQL</a>
-                    </li>
-
-                    <!-- Ajout de l'onglet "Quiz SQL" -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="/quiz-symfony">Quiz Symfony</a>
+                    <!-- Menu déroulant Quiz -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="quizDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                            Quiz
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="quizDropdown">
+                            <li><a class="dropdown-item" href="/quiz-php">Quiz PHP</a></li>
+                            <li><a class="dropdown-item" href="/quiz-sql">Quiz SQL</a></li>
+                            <li><a class="dropdown-item" href="/quiz-symfony">Quiz Symfony</a></li>
+                        </ul>
                     </li>
 
                      <!-- Ajout de l'onglet "Recap" -->
                     <li class="nav-item">
-                        <a class="nav-link" href="/recap">Recap</a>
+                        <a class="nav-link" href="/quiz-recap">Recapitulatif</a>
                     </li>
                 </ul>
 
