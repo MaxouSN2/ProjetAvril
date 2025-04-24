@@ -7,6 +7,7 @@
     <h1 class="mb-4">Recapitulatif</h1>
     <p>Ce quiz est un recap de 21 questions sur l'ensemble des cours disponible.</p>
     <p> Il y a 7 questions sur les thèmes suivants : PHP, SQL et Symfony </p>
+    <p> Vous avez 1 minute de réponse par question, à vous d'avoir le meilleur score possible ! </p>
 
     {# Bloc Résultats et Correction #}
     {% if showResults %}
@@ -49,7 +50,6 @@
             📥 Exporter les résultats en CSV
         </a>
 
-
     {# Bloc Quiz Question par Question #}
     {% else %}
         {% set question = questions[0] %}
@@ -66,6 +66,14 @@
                  aria-valuemax="100">
                 {{ progress }}%
             </div>
+        </div>
+
+        {# Timer #}
+        <div class="alert alert-warning">
+            ⏱️ Temps restant : <span id="timer">01:00</span>
+        </div>
+        <div id="timeout-message" class="alert alert-danger d-none">
+            ⛔ Temps écoulé. Veuillez passer à la question suivante.
         </div>
 
         <h4>Question {{ currentQuestion + 1 }} sur {{ totalQuestions }}</h4>
@@ -94,6 +102,39 @@
                 {% endif %}
             </button>
         </form>
+
+        {# Script du timer #}
+        <script>
+            let duration = 60;
+            const timerDisplay = document.getElementById('timer');
+            const timeoutMessage = document.getElementById('timeout-message');
+            const inputs = document.querySelectorAll('input[name="answer"]');
+            const submitBtn = document.querySelector('button[type="submit"]');
+
+            function updateTimer() {
+                let minutes = Math.floor(duration / 60);
+                let seconds = duration % 60;
+                timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+                if (duration > 0) {
+                    duration--;
+                } else {
+                    clearInterval(timerInterval);
+                    disableInputs();
+                }
+            }
+
+            function disableInputs() {
+                inputs.forEach(input => input.disabled = true);
+                submitBtn.classList.add('btn-secondary');
+                submitBtn.classList.remove('btn-primary');
+                submitBtn.innerText = 'Temps écoulé - passer à la question suivante';
+                timeoutMessage.classList.remove('d-none');
+            }
+
+            const timerInterval = setInterval(updateTimer, 1000);
+            updateTimer();
+        </script>
     {% endif %}
 </div>
 {% endblock %}

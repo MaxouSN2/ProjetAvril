@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Statistiques du Quiz{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1 class="mb-4">📊 Vos Statistiques</h1>
+    <p>Vous trouverez ci-dessous les résultats sous forme de graphe pour le quizz récapitulatif</p>
+    <p>Cette page évoluera avec le temps pour permettre des statistiques sur chacun des QCM présent sur notre site</p>
+
+    {% if scores is empty %}
+        <div class="alert alert-warning">
+            Vous n'avez pas encore réalisé de tentative sur le quiz recap.
+        </div>
+    {% else %}
+        <canvas id="quizStatsChart" width="400" height="200"></canvas>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            const ctx = document.getElementById('quizStatsChart').getContext('2d');
+
+            const scores = {{ scores|json_encode|raw }};
+            const labels = scores.map((_, i) => `Essai ${i + 1}`);
+
+            const data = {
+                labels: labels,
+                datasets: [{
+                    label: 'Score sur 21',
+                    data: scores,
+                    fill: false,
+                    borderColor: 'rgb(75, 192, 192)',
+                    tension: 0.3
+                }]
+            };
+
+            const config = {
+                type: 'line',
+                data: data,
+                options: {
+                    scales: {
+                        y: {
+                            min: 0,
+                            max: 21,
+                            title: {
+                                display: true,
+                                text: 'Score'
+                            }
+                        }
+                    }
+                }
+            };
+
+            new Chart(ctx, config);
+        </script>
+    {% endif %}
+
+    <a href="{{ path('quiz-recap') }}" class="btn btn-primary mt-4">Recommencer le quiz</a>
+
+    <a href="{{ path('stats_reset') }}" class="btn btn-danger mt-4">
+        🔄 Réinitialiser les statistiques
+    </a>
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success mt-3">
+            {{ message }}
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

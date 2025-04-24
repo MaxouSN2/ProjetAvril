@@ -51,6 +51,13 @@ class QuizRecapController extends AbstractController
                     'total' => $totalQuestions
                 ];
 
+                // Enregistrement du score dans l'historique (ajout du 22/04)
+                $allScores = $session->get('quiz_recap_all_scores', []);
+                $allScores[] = $goodAnswers;
+                $session->set('quiz_recap_all_scores', $allScores);
+
+
+
                 return $this->render('recap/quiz-recap.html.twig', [
                     'questions' => $questions,
                     'score' => $score,
